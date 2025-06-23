@@ -1,5 +1,5 @@
 import google.generativeai as genai
-import groq
+from groq import Groq
 from datetime import datetime
 import uuid
 from config import settings
@@ -14,10 +14,10 @@ class ChatService:
         else:
             self.gemini_model = None
         
-        # Initialize Groq with simplified initialization
+        # Initialize Groq with latest SDK
         if settings.GROQ_API_KEY and settings.GROQ_API_KEY != "your-groq-api-key":
             try:
-                self.groq_client = groq.Client(api_key=settings.GROQ_API_KEY)
+                self.groq_client = Groq(api_key=settings.GROQ_API_KEY)
             except Exception as e:
                 print(f"Warning: Could not initialize Groq client: {e}")
                 self.groq_client = None
